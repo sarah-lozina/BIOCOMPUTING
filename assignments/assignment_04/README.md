@@ -189,7 +189,7 @@ git add
 
 git commit -m”Add Assignment 4: Bash scripts and program PATHs”
 
-git pushSarah Lozina 9/25 Assignment 4: Bash scripts and program PATHs
+git push
 
 # Reflection
 
