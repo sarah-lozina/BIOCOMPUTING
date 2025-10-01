@@ -63,6 +63,8 @@ chmod a+x ./fastp
 
 #I already had the path to programs in my .bashrc and when I type fastp I get the help menu whether I call it from programs or BIOCOMPUTING.
 
+#Also when working with Sophie and Namit, we just installed fastp and then called it in the script in task 4. We were unclear if we had to include it in the script being that the instructions did not explicitly say to. We assumed that maybe the install version or the methodology would vary person to person, therefore if someone else was to use our pipeline we would instruct them to install fastp and add it to their path in a way that works for them.
+
 
 # Task 4: Script to run fastp
 
@@ -125,9 +127,9 @@ rm -rf ./data/raw/* ./data/trimmed/*
 ./pipeline.sh
 
 
-## How to use the pipeline
+# How to use the pipeline
 
-Before beginning it is recommended that you have a file structure set up that has a data directory (with two subdirectories: raw and trimmed), a scripts directory (where put scripts 01_download_data.sh and 02_run_fastp.sh).
+Before beginning it is recommended that you have a file structure set up that has a data directory (with two subdirectories: raw and trimmed), a scripts directory (where put scripts 01_download_data.sh and 02_run_fastp.sh). Additionally, have fastp installed and added to your path. 
 
 Running pipeline.sh (./pipeline.sh) (after making it executable chmod +x) will dowload and extract FASTQ data, putting the raw data in a directory inside of the data directory via the 01_download_data.sh script and the processes a single sample’s paired reads via 02_run_fastp.sh. Using this pipeline you can process multiple samples more efficiently than one at a time!
 
