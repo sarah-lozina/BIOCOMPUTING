@@ -89,13 +89,13 @@ FWD_OUT=${FWD_IN/.fastq.gz/.trimmed.fastq.gz}
 REV_OUT=${REV_IN/.fastq.gz/.trimmed.fastq.gz}
 
 fastp --in1 $FWD_IN --in2 $REV_IN --out1 ${FWD_OUT/raw/trimmed} --out2 ${REV_OUT/raw/trimmed} --json /dev/null --html /dev/null --trim_front1 8 --trim_front2 8 --trim_tail1 20 --trim_tail2 20 --n_base_limit 0 --length_required 100 --average_qual 20
-
 cd ..
 
 ./scripts/02_run_fastp.sh ./data/raw/6083_001_S1_R1_001.subset.fastq.gz
 
 cd data/trimmed #see two files!
 
+#also went into raw and trimmed and zcat| head -n 5 to peak at the trimmed and raw files, which appear to look different from eachother indicating fastp was successful.
 
 # Task 5: ‘pipeline.sh’ script
 
