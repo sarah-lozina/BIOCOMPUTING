@@ -61,7 +61,7 @@ mkdir -p ./data/dog_reference
 #get accession numbers and put into a txt file
 cut -d',' -f1 data/SraRunTable_7.csv | tail -n +2 > data/accession.txt
 
-for bee_data in $(cat data/accession.txt); do echo “downloading ${bee_data}”; fasterq-dump ${bee_data} -O data/raw; done
+for bee_data in $(cat data/accession.txt); do echo "downloading ${bee_data}"; fasterq-dump ${bee_data} -O data/raw; done
 
 #download the dog data with datasets
 
@@ -191,34 +191,33 @@ for sam_view in ./output/*.sam; do ACC=${sam_view#./output/}; ACC=${ACC%.sam}; s
 
 # Task 8
 
-nano 04_dog_mapped
+#moved data output and ref to scr10 prior to this, script 04_dog_mapped.sh written as such
+
+mkdir -p ~/scr10/assignment_07
+
+mv ref output data ~/scr10/assignment_07
+
+nano 04_dog_mapped.sh
 
 #!/bin/bash
 
 echo -e "Accession\tTotal_Reads\tDog_Mapped_Reads"
 
-for bee in output/*.sam; do [[ ${bee} == *_mapped_to_dog.sam ]] && continue; acc=$(basename ${bee} .sam); total=$(grep -vc "^@" ${bee}); mapped=$(grep -v "^@" output/${acc}_mapped_to_dog.sam | wc -l); echo -e "${acc}\t${total}\t${mapped}"; done
+for bee in $(find ${HOME}/scr10/assignment_07/output/ -name “*.sam" ! -name "*_mapped_to_dog.sam"); do acc=$(basename ${bee} .sam); total=$(grep -vc "^@" ${bee}); mapped=$(grep -vc "^@" "${HOME}/scr10/assignment_07/output/${acc}_mapped_to_dog.sam"); echo -e "${acc}\t${total}\t${mapped}"; done
 
 #output
 
 Accession	Total_Reads	Dog_Mapped_Reads
-SRR27174686	26438840	6019
-SRR27174689	25735702	20606
-SRR27174696	27396496	18133
-SRR27174701	24737170	10674
-SRR27174702	27467458	16595
-SRR27174708	23159196	7930
-SRR27174710	23886670	57874
 SRR27174711	32305188	6110
 SRR27174712	30751534	40856
 SRR27174715	32505100	131510
-
-#add to .gitignore 
-
-find ./assignments -name "*.sam" >> .gitignore
-
-find ./asssignments -name "*.fastq" >> .gitignore
-
+SRR27174710	23886670	57874
+SRR27174702	27467458	16595
+SRR27174708	23159196	7930
+SRR27174696	27396496	18133
+SRR27174701	24737170	10674
+SRR27174686	26438840	6019
+SRR27174689	25735702	20606
 
 #Reflection
 
